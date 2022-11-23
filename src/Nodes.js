@@ -1,3 +1,5 @@
+import { isObject } from "./validation.js";
+
 export default function Nodes({ $target, initialState, onClick, onPrevClick }) {
   const $nodes = document.createElement("div");
   $target.appendChild($nodes);
@@ -28,7 +30,7 @@ export default function Nodes({ $target, initialState, onClick, onPrevClick }) {
           ? ""
           : `
         <div class="Node">
-          <img src="https://woodaehyun/images/prev.png">
+          <img src="https://cdn.roto.codes/images/prev.png">
         </div>  
       `
       }
@@ -38,8 +40,8 @@ export default function Nodes({ $target, initialState, onClick, onPrevClick }) {
           <div class="Node" data-id="${node.id}">
             <img src="${
               node.type === "DIRECTORY"
-                ? "https://woodaehyun/images/directory.png"
-                : "https://woodaehyun/images/file.png"
+                ? "https://cdn.roto.codes/images/directory.png"
+                : "https://cdn.roto.codes/images/file.png"
             }">
             ${node.name}
           </div>
@@ -55,17 +57,19 @@ export default function Nodes({ $target, initialState, onClick, onPrevClick }) {
     const $node = e.target.closest(".Node");
 
     const { id } = $node.dataset;
-    console.log(id);
-    //id가 없는 경우는??
-    if (!id) {
-      //뒤로가기 누른 거 처리
-    }
 
     const node = this.state.nodes.find((node) => node.id === id);
 
     if (node) {
       onClick(node);
     } else {
+      onPrevClick();
+    }
+  });
+
+  window.addEventListener("keyup", (e) => {
+    const { isRoot } = this.state;
+    if (e.key === "Backspace" && isRoot === false) {
       onPrevClick();
     }
   });
