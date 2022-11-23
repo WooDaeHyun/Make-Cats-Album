@@ -3,11 +3,21 @@ export default function Nodes({ $target, initialState, onClick, onPrevClick }) {
   $target.appendChild($nodes);
   $nodes.classList.add("Nodes");
 
-  this.state = initialState;
+  if (isObject(initialState)) {
+    this.state = initialState;
+  }
 
   this.setState = (nextState) => {
-    this.state = nextState;
-    this.render();
+    const thisStateNodes = [...this.state.nodes];
+    const nextStateNodes = [...nextState.nodes];
+
+    if (
+      isObject(nextState) &&
+      JSON.stringify(thisStateNodes) !== JSON.stringify(nextStateNodes)
+    ) {
+      this.state = nextState;
+      this.render();
+    }
   };
 
   this.render = () => {
