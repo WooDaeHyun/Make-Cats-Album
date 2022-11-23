@@ -1,3 +1,5 @@
+import { isObject } from "./validation.js";
+
 export default function ImageViewer({ $target, onClose }) {
   const $imageViewer = document.createElement("div");
   $imageViewer.className = "ImageViewer Modal";
@@ -8,8 +10,14 @@ export default function ImageViewer({ $target, onClose }) {
   };
 
   this.setState = (nextState) => {
-    this.state = nextState;
-    this.render();
+    if (
+      isObject(nextState) &&
+      this.state.selectedImageUrl !== nextState.selectedImageUrl
+    ) {
+      console.log("ImageViewer >>>>", nextState);
+      this.state = nextState;
+      this.render();
+    }
   };
 
   this.render = () => {
@@ -25,7 +33,7 @@ export default function ImageViewer({ $target, onClose }) {
 
   window.addEventListener("keyup", (e) => {
     //esc누른 경우 onClose호출한다.
-    if (e.key === "Escape") {
+    if (e.key === "Escape" || e.key === "Backspace") {
       onClose();
     }
   });
