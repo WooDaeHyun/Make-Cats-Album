@@ -19,7 +19,7 @@ export default function Loading({ $target }) {
   this.render = () => {
     $loading.innerHTML = `
       <div class="content">
-        <img width="100%" src="https://cdn.roto.codes/images/nyan-cat.gif" alt="Loading..." />
+        <img width="100%" src="https://woodaehyun/images/nyan-cat.gif" alt="Loading..." />
       </div>
     `;
 

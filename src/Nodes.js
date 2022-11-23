@@ -30,7 +30,7 @@ export default function Nodes({ $target, initialState, onClick, onPrevClick }) {
           ? ""
           : `
         <div class="Node">
-          <img src="https://cdn.roto.codes/images/prev.png">
+          <img src="https://woodaehyun/images/prev.png">
         </div>  
       `
       }
@@ -40,8 +40,8 @@ export default function Nodes({ $target, initialState, onClick, onPrevClick }) {
           <div class="Node" data-id="${node.id}">
             <img src="${
               node.type === "DIRECTORY"
-                ? "https://cdn.roto.codes/images/directory.png"
-                : "https://cdn.roto.codes/images/file.png"
+                ? "https://woodaehyun/images/directory.png"
+                : "https://woodaehyun/images/file.png"
             }">
             ${node.name}
           </div>
