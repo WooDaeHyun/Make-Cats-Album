@@ -1,13 +1,20 @@
+import { isArray } from "./validation.js";
+
 export default function Breadcrumb({ $target, initialState, onClick }) {
   const $breadcrumb = document.createElement("nav");
   $breadcrumb.className = "Breadcrumb";
   $target.appendChild($breadcrumb);
 
-  this.state = initialState;
+  if (isArray(initialState)) {
+    this.state = initialState;
+  }
 
   this.setState = (nextState) => {
-    this.state = nextState;
-    this.render();
+    if (isArray(nextState) && this.state !== nextState) {
+      console.log("Breadcrumb >>>>", nextState);
+      this.state = nextState;
+      this.render();
+    }
   };
 
   this.render = () => {
